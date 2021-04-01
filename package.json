@@ -1,11 +1,17 @@
 {
+  "name": "tailwindcss",
+  "version": "1.0.0",
+  "description": "Webpack + TailwindCSS + Twig",
+  "author": "By kl2112 <dangtrungkien@gmail.com>",
+  "license": "ISC",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve",
     "watch": "cross-env NODE_ENV=development webpack serve watch",
-    "build": "cross-env NODE_ENV=production webpack serve build",
-    "deploy": "cross-env NODE_ENV=production webpack serve deploy"
+    "build": "cross-env NODE_ENV=production webpack build",
+    "deploy": "cross-env NODE_ENV=production webpack deploy"
   },
   "dependencies": {
+    "css-loader": "^5.2.0",
     "node-sass": "^5.0.0"
   },
   "devDependencies": {
@@ -16,6 +22,7 @@
     "html-webpack-plugin": "^5.3.1",
     "postcss": "^8.2.9",
     "postcss-cli": "^8.3.1",
+    "postcss-loader": "^5.2.0",
     "sass-loader": "^11.0.1",
     "serve": "^11.3.2",
     "style-loader": "^2.0.0",

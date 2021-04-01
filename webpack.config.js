@@ -46,9 +46,8 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.s?css$/,
-        include: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /\.(sa|sc|c)ss$/,
+        use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
       },
       {
         test: /\.twig$/,
