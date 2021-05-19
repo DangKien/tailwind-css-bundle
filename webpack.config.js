@@ -1,6 +1,8 @@
 // Dependencies
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const sass = require("sass");
 
 const PATHS = {
   src: path.join(__dirname, "./src"),
@@ -12,23 +14,26 @@ const webpackConfig = {
   mode: process.env.NODE_ENV ? "production" : "development",
   entry: {
     index: `${PATHS.src}/scripts/index.js`,
+    chat: `${PATHS.src}/scripts/chat.js`,
   },
   output: {
     path: PATHS.build,
     filename: "[name].js",
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebPackPlugin({
       template: `${PATHS.html}/home.html.twig`,
       filename: "index.html",
       chunks: ["index"],
       title: "Homepage",
     }),
+
     new HtmlWebPackPlugin({
-      template: `${PATHS.html}/about.html.twig`,
-      filename: "about.html",
-      chunks: ["index"],
-      title: "About",
+      template: `${PATHS.html}/chat.html.twig`,
+      filename: "chat.html",
+      chunks: ["index", "chat"],
+      title: "ChatPage",
     }),
   ],
   optimization: {
@@ -52,6 +57,33 @@ const webpackConfig = {
       {
         test: /\.twig$/,
         loader: "twig-loader",
+      },
+      {
+        test: /\.(gif|jpe?g|png|svg)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+          },
+        },
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "postcss-loader",
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: sass,
+            },
+          },
+        ],
       },
     ],
   },
